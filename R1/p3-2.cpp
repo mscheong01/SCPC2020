@@ -3,9 +3,7 @@
 #include<iostream>
 using namespace std;
 
-int fw[1510][1510];
-int sel[1510][2];
-int past[1510][1510];
+int dp[1510][1510];
 
 int main(){
     int T;
@@ -15,47 +13,40 @@ int main(){
         cin>>n>>k>>m;
         for(int i=1;i<=n;i++){
             for(int j=1;j<=n;j++){
-                fw[i][j]=9999;
-                past[i][j]=9999;
+                dp[i][j]=9999;
                 if(i==j){
-                    fw[i][j]=0;
-                    past[i][j]=0;
+                    dp[i][j]=0;
                 }
             }
         }
         for(int i=0;i<k;i++){
             int h1,h2;
             cin>>h1>>h2;
+            int temp;
             for(int j=1;j<=n;j++){
-                if(past[j][h1]>=past[j][h2]){
-                    fw[j][h1]=past[j][h2];
-                    sel[j][0]++;
-                    
+                if(dp[j][h1]==dp[j][h2]){
+                    temp=dp[j][h1];
+                    dp[j][h1]=dp[j][h2];
+                    dp[j][h2]=temp;
                 }
-                if(past[j][h2]>=past[j][h1]){
-                    fw[j][h2]=past[j][h1];
-                    sel[j][1]++;
+                else if(dp[j][h1]>dp[j][h2]){
+                    temp=dp[j][h1];
+                    dp[j][h1]=dp[j][h2];
+                    dp[j][h2]++;
                 }
-                if(sel[j][0]==0) fw[j][h1]++;
+                else if(dp[j][h1]<dp[j][h2]){
+                    dp[j][h2]=dp[j][h1];
+                    dp[j][h1]++;
+                }
                 
-                if(sel[j][1]==0) fw[j][h2]++;
-                
-                    
-                
-            }
-            for(int j=1;j<=n;j++){
-                past[j][h1]=fw[j][h1];
-                past[j][h2]=fw[j][h2];
-                sel[j][0]=0;
-                sel[j][1]=0;
             }
         }
         int sum=0;
         for(int i=0;i<m;i++){
             int a,b;
             cin>>a>>b;
-            if(fw[a][b]<3000){
-                sum+=fw[a][b];
+            if(dp[a][b]<3000){
+                sum+=dp[a][b];
             }
             else sum+=-1;
         }

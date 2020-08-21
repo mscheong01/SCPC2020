@@ -1,4 +1,4 @@
-//A correct solution for p3 given to me by my friend SangWon Lee of Seoul Nat Univ.
+//An alternative correct solution for p3 given to me by my friend SangWon Lee of Seoul Nat Univ.
 
 
 #include <stdio.h>
