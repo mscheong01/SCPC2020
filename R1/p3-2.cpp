@@ -27,7 +27,6 @@ int main(){
             int h1,h2;
             cin>>h1>>h2;
             for(int j=1;j<=n;j++){
-                bool fl1=false,fl2=false;
                 if(past[j][h1]>=past[j][h2]){
                     fw[j][h1]=past[j][h2];
                     sel[j][0]++;
@@ -37,12 +36,10 @@ int main(){
                     fw[j][h2]=past[j][h1];
                     sel[j][1]++;
                 }
-                if(sel[j][0]==0){
-                    fw[j][h1]++;
-                }
-                if(sel[j][1]==0){
-                    fw[j][h2]++;
-                }
+                if(sel[j][0]==0) fw[j][h1]++;
+                
+                if(sel[j][1]==0) fw[j][h2]++;
+                
                     
                 
             }
